@@ -56,7 +56,13 @@ const handleDeletePlant = (idOfPlantToRemove) => {
 }
 
 const handleChangeEditingMode = (value) => {
-  setEditPlantById(value);
+// this (value === editPlantById ? '' : value ) will toggle the button so i can go to edit mode but also leave edit mode. 
+// value on click will be the id 2nd click will empty back to '' false 
+// update useEffect in plant page to use else for the toggle to clear the form back to the initial state of 
+// else {
+//       setNewPlant(initialState)
+//     }
+  setEditPlantById(value === editPlantById ? '' : value );
 }
 // pass to plant list then to plant card 
 

@@ -1,18 +1,16 @@
 import {useState, useEffect} from "react";
 
+const initialState ={
+  name:"",
+  image:"",
+  price:""
+}
+
+
 function NewPlantForm({handleCreatePlant, editPlantById, URL, handleChangeEditingMode, handleEditPlant}) {
  
-  const [newPlant, setNewPlant] = useState({
-    name:"",
-    image:"",
-    price:""
-  })
-  const initialState ={
-    name:"",
-    image:"",
-    price:""
-  }
-
+  const [newPlant, setNewPlant] = useState(initialState)
+  
   useEffect(() => {
     if (editPlantById) {
       fetch(`${URL}/${editPlantById}`)
@@ -21,6 +19,8 @@ function NewPlantForm({handleCreatePlant, editPlantById, URL, handleChangeEditin
           setNewPlant(data);
         })
         .catch(err => alert(err));
+    } else {
+      setNewPlant(initialState)
     }
   }, [editPlantById]);
 
@@ -41,7 +41,7 @@ function NewPlantForm({handleCreatePlant, editPlantById, URL, handleChangeEditin
     fetch(editPlantById ? `${URL}/${editPlantById}` : URL, {
       method: editPlantById ? "PATCH" : "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "Application/JSON"
       },
       body: JSON.stringify(newPlant)
     })
